@@ -1,0 +1,15 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "PL54F4LJG7.com.51vv.vpian",
+                "paths": ["*"]
+            },
+               {
+                "appID": "2T25E6M9K3.com.51vv.vpianqiye",
+                "paths": ["*"]
+            },
+        ]
+    }
+}
