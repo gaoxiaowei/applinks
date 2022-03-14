@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <meta name="format-detection" content="telephone=no" />
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+
+<body>
+  <div>
+    <input type="text" class="active target" />
+    <input type="text" class="target" />
+    <input type="tel" id="numberInput" />
+    <input type="text" class="target" id="activeElementToShowKeyboard" />
+  </div>
+  <style type="text/css">
+    .active {
+      background-color: red;
+    }
+  </style>
+  <script type="text/javascript">
+    $(".target").focusin(function() {
+      $(".active").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    function FunctionCalledByWkWebView(someText) {
+      var $selected = $(".active").removeClass("active");
+      $selected.val(someText);
+      var divs = $(".target");
+
+      var newActiveElement = divs.eq((divs.index($selected) + 1) % divs.length).addClass("active");
+
+      if ($(newActiveElement).is("#activeElementToShowKeyboard")) {
+        //alert("Should bring up keyboard!");
+        $("#numberInput").focus();
+      }
+    }
+  </script>
+</body>
+
+</html>
