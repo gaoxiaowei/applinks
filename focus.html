@@ -1,0 +1,62 @@
+//html
+<div id="keybordInput">
+	<input class="change-input" type="text" maxlength="40" id="change-input" value=''/>
+</div>
+//css
+ 
+#keybordInput{
+    display: flex;
+    position: fixed;
+    bottom: -100px;
+    width: 100%;
+    padding:8px 0;
+    background: #F5F6F7;
+    z-index: 99999;
+}
+#keybordInput input{
+	flex: 1;
+	margin:0 10px;
+	background: #fff;
+	border-radius: 5px;
+	line-height: 30px;
+	max-height: 90px;
+	overflow-y:scroll;
+    z-index: 99999;
+    padding:0 5px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+//js
+//点击input调起键盘
+	$('body').on('click','.changeInput',function(){
+		setTimeout(function(){
+			$('.change-input').focus();
+		},10);
+	})
+	//当键盘调起时，原生给我们传高度，键盘弹起的时候传高度，键盘收起的时候传0（此处的方法是原生约定好的）
+	window.keyboardHeight=function(height){
+		if(height!=0){
+			$('.dd-footer').css('display','none')
+			if(isAndroid()){//安卓直接将键盘高度赋值bottom就可以
+				setTimeout(function(){
+					$('#keybordInput').css({
+						'paddingBottom':'25px',
+						'bottom':height+'px'
+					})
+				},100)
+			}else{//ios不需要高度，直接写0就可以
+				setTimeout(function(){
+					$('#keybordInput').css({
+						'paddingBottom':'8px',
+						'bottom':0+'px'
+					})
+				},1)
+			}
+		}else{
+			$('.dd-footer').css('display','-webkit-flex')
+			$('#keybordInput').css({
+				'bottom':'-100px'
+			})
+			$('.change-input').blur();
+		}
+	}
